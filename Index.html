@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Selamat Pagi Sayangku</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #ffb6c1 0%, #ff69b4 100%);
+            text-align: center;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        .container {
+            position: relative;
+            max-width: 500px;
+        }
+        
+        .message-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border: 3px dashed #ff69b4;
+        }
+        
+        h1 {
+            color: #d23369;
+            font-size: 2.3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        .love-btn {
+            background: linear-gradient(45deg, #ff85a2, #ff69b4);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255,105,180,0.4);
+            transition: all 0.3s;
+            outline: none;
+            font-family: 'Comic Sans MS', cursive;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .love-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255,105,180,0.6);
+        }
+        
+        .love-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .love-btn::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+        
+        .love-btn:hover::after {
+            animation: shine 1.5s infinite;
+        }
+        
+        @keyframes shine {
+            100% {
+                left: 100%;
+            }
+        }
+        
+        .hidden-message {
+            display: none;
+            margin-top: 30px;
+            font-size: 1.5em;
+            color: #d23369;
+            font-weight: bold;
+            animation: bounceIn 0.8s;
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.1); opacity: 0; }
+            60% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff69b4;
+            animation: float 4s ease-in-out infinite;
+            opacity: 0;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .cute-element {
+            position: absolute;
+            font-size: 30px;
+            animation: floatElement 8s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes floatElement {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        
+        .sticker {
+            position: absolute;
+            font-size: 40px;
+        }
+        
+        .bunny {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            font-size: 60px;
+            transform: rotate(-15deg);
+            animation: wiggle 2s infinite alternate;
+        }
+        
+        @keyframes wiggle {
+            0% { transform: rotate(-15deg); }
+            100% { transform: rotate(15deg); }
+        }
+        
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            font-size: 15px;
+            color: gold;
+            animation: twinkle 2s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="message-box">
+            <h1>Selamat Pagi, <span style="color: #d23369;">Sayangku</span>! 💖</h1>
+            <p>pagi ini terasa dingin, tapi rasanya hangat karena ada ayang di pikiran aa.<br> tapi jujur, aa lebih suka ayang ada dipelukan aa</p>
+            <p>Jangan lupa sarapan ya, aku sayang kamu! 😊</p>
+            
+            <button class="love-btn" id="loveButton">Klik Aku Dong~</button>
+            
+            <div class="hidden-message" id="hiddenMessage">I Love You Sayang! 💕</div>
+            
+            <div class="bunny">🐰</div>
+        </div>
+        
+        <div class="hearts" id="heartsContainer"></div>
+        <div class="stars" id="starsContainer"></div>
+        
+        <!-- Elemen imut -->
+        <div class="cute-element" style="top:10%; left:5%;">🌸</div>
+        <div class="cute-element" style="top:20%; right:8%; animation-delay:1s;">🍭</div>
+        <div class="cute-element" style="bottom:15%; left:10%; animation-delay:2s;">🍩</div>
+        <div class="cute-element" style="bottom:25%; right:15%; animation-delay:3s;">🧁</div>
+    </div>
+
+    <script>
+        const loveButton = document.getElementById('loveButton');
+        const hiddenMessage = document.getElementById('hiddenMessage');
+        const heartsContainer = document.getElementById('heartsContainer');
+        const starsContainer = document.getElementById('starsContainer');
+        
+        // Buat bintang-bintang
+        for (let i = 0; i < 20; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            star.innerHTML = '⭐';
+            starsContainer.appendChild(star);
+        }
+        
+        loveButton.addEventListener('click', function() {
+            // Tampilkan pesan
+            hiddenMessage.style.display = 'block';
+            
+            // Buat efek hati
+            createHearts();
+            
+            // Ganti teks tombol sementara
+            this.innerHTML = 'UwU Terima Kasih~ 💝';
+            setTimeout(() => {
+                this.innerHTML = 'Klik Aku Dong~';
+            }, 2000);
+            
+            // Tambahkan efek confetti
+            createConfetti();
+        });
+        
+        function createHearts() {
+            // Hapus hati lama jika ada
+            heartsContainer.innerHTML = '';
+            
+            // Buat 30 hati dengan berbagai bentuk
+            const heartIcons = ['❤️', '💖', '💗', '💓', '💞', '💕'];
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                
+                // Posisi acak
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.bottom = '0';
+                
+                // Animasi delay acak
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.fontSize = (15 + Math.random() * 15) + 'px';
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        function createConfetti() {
+            const confettiContainer = document.createElement('div');
+            confettiContainer.style.position = 'absolute';
+            confettiContainer.style.width = '100%';
+            confettiContainer.style.height = '100%';
+            confettiContainer.style.top = '0';
+            confettiContainer.style.left = '0';
+            confettiContainer.style.pointerEvents = 'none';
+            document.body.appendChild(confettiContainer);
+            
+            const emojis = ['✨', '🌟', '🎀', '💫', '⚡️', '🎉', '🎊'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'absolute';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-20px';
+                confetti.style.fontSize = (10 + Math.random() * 20) + 'px';
+                confetti.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                confetti.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                confettiContainer.appendChild(confetti);
+                
+                // Keyframes untuk animasi jatuh
+                const style = document.createElement('style');
+                style.innerHTML = `
+                    @keyframes fall {
+                        to {
+                            top: 100%;
+                            transform: rotate(${Math.random() * 360}deg);
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // Hapus confetti setelah selesai
+            setTimeout(() => {
+                document.body.removeChild(confettiContainer);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
